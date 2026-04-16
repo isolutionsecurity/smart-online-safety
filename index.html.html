@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Online Safety — Your Resource Page</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:    #0D1B2A;
+    --blue:    #1A3C5E;
+    --bright:  #1976D2;
+    --bright2: #2196F3;
+    --green:   #1B7A3E;
+    --red:     #C0392B;
+    --orange:  #D35400;
+    --gold:    #E8A838;
+    --white:   #FFFFFF;
+    --offwhite:#F4F7FA;
+    --ltblue:  #E3EEF9;
+    --gray:    #4A5568;
+    --lgray:   #8A9BB0;
+    --dgray:   #2D3748;
+    --card-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    --card-shadow-hover: 0 8px 32px rgba(25,118,210,0.15);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--offwhite);
+    color: var(--dgray);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    color: white;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .header-accent { height: 5px; background: var(--bright); }
+  .header-inner {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 24px 40px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  .header-icon {
+    width: 64px; height: 64px;
+    background: var(--blue);
+    border-radius: 16px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px;
+    flex-shrink: 0;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+  .header-text h1 {
+    font-family: 'Sora', sans-serif;
+    font-size: clamp(22px, 5vw, 30px);
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    line-height: 1.15;
+  }
+  .header-text p {
+    font-size: 15px;
+    color: #8BAFD1;
+    margin-top: 6px;
+  }
+  .header-dots {
+    position: absolute;
+    right: -40px; top: -40px;
+    width: 200px; height: 200px;
+    opacity: 0.04;
+    background-image: radial-gradient(circle, white 1.5px, transparent 1.5px);
+    background-size: 20px 20px;
+  }
+
+  /* ── NAV TABS ── */
+  .nav-wrap {
+    background: var(--navy);
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .nav-tabs {
+    max-width: 860px;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 24px;
+    gap: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .nav-tabs::-webkit-scrollbar { display: none; }
+  .nav-tab {
+    padding: 14px 18px;
+    font-size: 13.5px;
+    font-weight: 500;
+    color: #8BAFD1;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    background: none; border-left: none; border-right: none; border-top: none;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-tab:hover { color: white; }
+  .nav-tab.active { color: white; border-bottom-color: var(--bright2); }
+
+  /* ── MAIN ── */
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 32px 24px 64px;
+  }
+
+  /* ── SECTIONS ── */
+  .section { display: none; animation: fadeIn 0.3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+  /* ── CHECKLIST SECTION ── */
+  .progress-wrap {
+    background: white;
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    margin-bottom: 28px;
+    border: 1px solid #E2EAF4;
+  }
+  .progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 12px;
+  }
+  .progress-label {
+    font-family: 'Sora', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--dgray);
+  }
+  .progress-count {
+    font-size: 13px;
+    color: var(--lgray);
+  }
+  .progress-bar-bg {
+    height: 10px;
+    background: var(--ltblue);
+    border-radius: 99px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--bright), var(--bright2));
+    border-radius: 99px;
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 0%;
+  }
+  .progress-message {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--lgray);
+    font-style: italic;
+    min-height: 20px;
+    transition: all 0.3s;
+  }
+
+  .checklist-group { margin-bottom: 24px; }
+  .checklist-group-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    color: var(--lgray);
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+
+  .check-item {
+    background: white;
+    border: 1.5px solid #E2EAF4;
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  }
+  .check-item:hover { border-color: var(--bright2); box-shadow: var(--card-shadow-hover); transform: translateY(-1px); }
+  .check-item.done { background: #F0FAF4; border-color: #A8D5B8; }
+  .check-item.done .check-text { color: var(--lgray); text-decoration: line-through; text-decoration-color: #A8D5B8; }
+
+  .check-box {
+    width: 22px; height: 22px;
+    border: 2px solid #C5D5E8;
+    border-radius: 6px;
+    flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+    margin-top: 1px;
+    font-size: 13px;
+  }
+  .check-item.done .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: white;
+  }
+  .check-item:hover:not(.done) .check-box { border-color: var(--bright); }
+
+  .check-content { flex: 1; }
+  .check-text {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--dgray);
+    line-height: 1.4;
+    transition: all 0.2s;
+  }
+  .check-note {
+    font-size: 12.5px;
+    color: var(--lgray);
+    margin-top: 3px;
+    font-style: italic;
+  }
+  .check-priority {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 99px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    margin-top: 2px;
+  }
+  .priority-high { background: #FEE2E2; color: #C0392B; }
+  .priority-medium { background: #FEF3C7; color: #D97706; }
+  .priority-low { background: #DBEAFE; color: #1976D2; }
+
+  /* ── STARTER KIT SECTION ── */
+  .kit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  @media (max-width: 600px) { .kit-grid { grid-template-columns: 1fr; } }
+
+  .kit-card {
+    background: white;
+    border-radius: 14px;
+    border: 1.5px solid #E2EAF4;
+    overflow: hidden;
+    box-shadow: var(--card-shadow);
+    transition: all 0.2s;
+  }
+  .kit-card:hover { transform: translateY(-2px); box-shadow: var(--card-shadow-hover); border-color: var(--bright2); }
+  .kit-card-header {
+    padding: 14px 18px 10px;
+    border-bottom: 1px solid #F0F4FA;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .kit-card-icon {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .kit-card-title {
+    font-family: 'Sora', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--dgray);
+  }
+  .kit-card-body { padding: 12px 18px 16px; }
+
+  .kit-tool {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px dashed #EDF2F7;
+    text-decoration: none;
+    transition: all 0.15s;
+  }
+  .kit-tool:last-child { border-bottom: none; padding-bottom: 0; }
+  .kit-tool:hover .kit-tool-name { color: var(--bright); }
+
+  .kit-tool-check {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: #E8F4E8;
+    color: var(--green);
+    font-size: 10px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    font-weight: 700;
+  }
+  .kit-tool-info { flex: 1; }
+  .kit-tool-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--dgray);
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .kit-tool-name .ext-icon { font-size: 10px; color: var(--lgray); }
+  .kit-tool-desc { font-size: 12px; color: var(--lgray); margin-top: 1px; }
+  .kit-tool-badge {
+    font-size: 10.5px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 99px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .badge-free { background: #D1FAE5; color: #065F46; }
+  .badge-paid { background: #FEF3C7; color: #92400E; }
+
+  /* ── EMERGENCY SECTION ── */
+  .emergency-intro {
+    background: #FFF8E1;
+    border: 1.5px solid var(--gold);
+    border-radius: 14px;
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    color: var(--orange);
+    font-weight: 500;
+  }
+  .resource-list { display: flex; flex-direction: column; gap: 10px; }
+  .resource-card {
+    background: white;
+    border-radius: 12px;
+    border: 1.5px solid #E2EAF4;
+    padding: 16px 20px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    box-shadow: var(--card-shadow);
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+  .resource-card:hover { border-color: var(--bright2); transform: translateY(-1px); box-shadow: var(--card-shadow-hover); }
+  .resource-emoji { font-size: 26px; flex-shrink: 0; margin-top: 2px; }
+  .resource-info h3 { font-size: 15px; font-weight: 700; color: var(--blue); margin-bottom: 3px; font-family: 'Sora', sans-serif; }
+  .resource-info p { font-size: 13.5px; color: var(--gray); line-height: 1.5; }
+
+  /* ── FAQ SECTION ── */
+  .faq-list { display: flex; flex-direction: column; gap: 8px; }
+  .faq-item {
+    background: white;
+    border-radius: 12px;
+    border: 1.5px solid #E2EAF4;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: border-color 0.2s;
+  }
+  .faq-item.open { border-color: var(--bright2); }
+  .faq-question {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 20px;
+    cursor: pointer;
+    background: none; border: none;
+    font-family: 'DM Sans', sans-serif;
+    text-align: left;
+    gap: 12px;
+  }
+  .faq-q-text { font-size: 15px; font-weight: 500; color: var(--dgray); flex: 1; }
+  .faq-chevron {
+    width: 24px; height: 24px;
+    background: var(--ltblue);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: transform 0.3s, background 0.2s;
+    font-size: 12px;
+    color: var(--bright);
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); background: var(--bright); color: white; }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4,0,0.2,1);
+  }
+  .faq-answer-inner {
+    padding: 0 20px 18px;
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    border-top: 1px solid #F0F4FA;
+  }
+  .faq-answer-inner a { color: var(--bright); }
+  .faq-answer-inner strong { color: var(--dgray); }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    margin-bottom: 24px;
+  }
+  .section-header h2 {
+    font-family: 'Sora', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .section-header p { font-size: 14px; color: var(--lgray); }
+
+  /* ── COMPLETION BANNER ── */
+  .completion-banner {
+    display: none;
+    background: linear-gradient(135deg, var(--green), #27AE60);
+    border-radius: 14px;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    color: white;
+    text-align: center;
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .completion-banner.show { display: block; }
+  @keyframes popIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+  .completion-banner h3 { font-family: 'Sora', sans-serif; font-size: 18px; font-weight: 800; }
+  .completion-banner p { font-size: 13.5px; opacity: 0.9; margin-top: 4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: #8BAFD1;
+    text-align: center;
+    padding: 24px;
+    font-size: 13px;
+  }
+  .footer-accent { height: 4px; background: var(--bright); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .header-inner { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .header-icon { width: 52px; height: 52px; font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header-accent"></div>
+<header>
+  <div class="header-dots"></div>
+  <div class="header-inner">
+    <div class="header-icon">🛡️</div>
+    <div class="header-text">
+      <h1>Smart Online Safety<br>for Everyday Life</h1>
+      <p>Your complete resource page — everything from today's session in one place.</p>
+    </div>
+  </div>
+</header>
+
+<div class="nav-wrap">
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showSection('checklist', this)">✅ Checklist</button>
+    <button class="nav-tab" onclick="showSection('kit', this)">🛠️ Starter Kit</button>
+    <button class="nav-tab" onclick="showSection('emergency', this)">🆘 Emergency</button>
+    <button class="nav-tab" onclick="showSection('faq', this)">❓ FAQ</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- ── CHECKLIST ── -->
+  <div class="section active" id="section-checklist">
+
+    <div class="section-header">
+      <h2>Your 10-Step Safety Checklist</h2>
+      <p>Tap each item as you complete it. Pick just one to do tonight.</p>
+    </div>
+
+    <div class="completion-banner" id="completion-banner">
+      <h3>🎉 You did it — all 10 steps complete!</h3>
+      <p>You are now better protected than 80% of people online. Well done.</p>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-header">
+        <span class="progress-label">Your Progress</span>
+        <span class="progress-count" id="progress-count">0 of 10 completed</span>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+      <div class="progress-message" id="progress-message">Start with anything — every step counts.</div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">🔐 Passwords</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Install a password manager</div>
+          <div class="check-note">Bitwarden (bitwarden.com) — free, takes 5 minutes</div>
+        </div>
+        <span class="check-priority priority-high">Do first</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Stop reusing passwords across websites</div>
+          <div class="check-note">Use your password manager to create unique ones</div>
+        </div>
+        <span class="check-priority priority-high">Do first</span>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">🔒 Two-Factor Authentication</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Enable 2FA on your Gmail account</div>
+          <div class="check-note">myaccount.google.com → Security → 2-Step Verification</div>
+        </div>
+        <span class="check-priority priority-high">Do first</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Enable 2FA on your bank account</div>
+          <div class="check-note">Log into your bank → Security Settings → Text Verification</div>
+        </div>
+        <span class="check-priority priority-high">Do first</span>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">🛡️ Antivirus & Security</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Check your antivirus is turned on</div>
+          <div class="check-note">Windows: Start → Windows Security → Virus & threat protection → should say Protected</div>
+        </div>
+        <span class="check-priority priority-medium">This week</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Check your email at HaveIBeenPwned.com</div>
+          <div class="check-note">Type your email — find out if you've been in a breach. Free.</div>
+        </div>
+        <span class="check-priority priority-medium">This week</span>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">💻 Updates</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Turn on automatic updates on your computer</div>
+          <div class="check-note">Windows: Settings → Windows Update → Advanced → turn on automatic updates</div>
+        </div>
+        <span class="check-priority priority-medium">This week</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Update your phone's operating system</div>
+          <div class="check-note">iPhone: Settings → General → Software Update. Android: Settings → Software Update</div>
+        </div>
+        <span class="check-priority priority-medium">This week</span>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">📱 Social Media & Privacy</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Change your Facebook/Instagram privacy to Friends Only</div>
+          <div class="check-note">Facebook: Settings → Privacy → Who can see your posts → Friends</div>
+        </div>
+        <span class="check-priority priority-low">This month</span>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Turn off location access for your camera app</div>
+          <div class="check-note">iPhone: Settings → Privacy → Location Services → Camera → Never</div>
+        </div>
+        <span class="check-priority priority-low">This month</span>
+      </div>
+    </div>
+
+    <div class="checklist-group">
+      <div class="checklist-group-title">👨‍👩‍👧 Family</div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div class="check-content">
+          <div class="check-text">Set up parental controls for your kids</div>
+          <div class="check-note">iPhone: Settings → Screen Time. Android: families.google.com (Family Link). Free.</div>
+        </div>
+        <span class="check-priority priority-low">This month</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ── STARTER KIT ── -->
+  <div class="section" id="section-kit">
+
+    <div class="section-header">
+      <h2>Your Safety Starter Kit</h2>
+      <p>Free tools you can set up tonight. Click any tool to go directly to the site.</p>
+    </div>
+
+    <div class="kit-grid">
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#EBF5FF">🔐</div>
+          <div class="kit-card-title">Password Manager</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://bitwarden.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Bitwarden <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Free · Trusted · Works on all devices · Recommended by experts</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+          <a href="https://nordpass.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">NordPass <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Very beginner-friendly · Great for first-time users</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free tier</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#E8F5E9">📱</div>
+          <div class="kit-card-title">Two-Factor Authentication App</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://apps.apple.com/app/google-authenticator/id388497605" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Google Authenticator <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Search in your phone's App Store · 2 minutes to set up</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+          <a href="https://authy.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Authy <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Easy to recover if you lose your phone · Highly recommended</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#FEEEEE">🛡️</div>
+          <div class="kit-card-title">Antivirus + VPN</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://support.microsoft.com/en-us/windows/stay-protected-with-windows-security" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Windows Defender <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Already on your Windows PC · Start → Windows Security → turn On</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Built-in</span>
+          </a>
+          <a href="https://www.bitdefender.com/solutions/free.html" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Bitdefender + VPN <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Excellent protection · VPN included · Great for public WiFi</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free tier</span>
+          </a>
+          <a href="https://norton.com/products/norton-360-antivirus-plus" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Norton 360 <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Antivirus + unlimited VPN + password manager all-in-one</div>
+            </div>
+            <span class="kit-tool-badge badge-paid">~$30/yr</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#F3E8FF">🔍</div>
+          <div class="kit-card-title">Check Files & Links</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://virustotal.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">VirusTotal <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Drop a suspicious file or paste a link — scans with 70+ engines instantly. Free.</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+          <a href="https://haveibeenpwned.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">HaveIBeenPwned <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Type your email — instantly see if you've been in a data breach</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#E3EEF9">🌐</div>
+          <div class="kit-card-title">Safer Browsing</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://ublockorigin.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">uBlock Origin <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Browser extension · Blocks harmful ads and malicious sites automatically</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="kit-card">
+        <div class="kit-card-header">
+          <div class="kit-card-icon" style="background:#FFF8E1">👨‍👩‍👧</div>
+          <div class="kit-card-title">Family Safety</div>
+        </div>
+        <div class="kit-card-body">
+          <a href="https://families.google.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Google Family Link <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Controls your child's Android phone · Set screen time · Approve apps</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Free</span>
+          </a>
+          <a href="https://support.apple.com/en-us/HT201304" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Apple Screen Time <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Built into every iPhone & iPad · Settings → Screen Time</div>
+            </div>
+            <span class="kit-tool-badge badge-free">Built-in</span>
+          </a>
+          <a href="https://meetcircle.com" target="_blank" class="kit-tool">
+            <div class="kit-tool-check">✓</div>
+            <div class="kit-tool-info">
+              <div class="kit-tool-name">Circle <span class="ext-icon">↗</span></div>
+              <div class="kit-tool-desc">Filters content for every device on your home WiFi automatically</div>
+            </div>
+            <span class="kit-tool-badge badge-paid">~$10/mo</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── EMERGENCY ── -->
+  <div class="section" id="section-emergency">
+
+    <div class="section-header">
+      <h2>If Something Goes Wrong</h2>
+      <p>Act fast — the sooner you respond, the less damage gets done.</p>
+    </div>
+
+    <div class="emergency-intro">
+      💡 Bookmark this page on your phone right now. If you ever get hacked or scammed, come straight here.
+    </div>
+
+    <div class="resource-list">
+      <a href="https://identitytheft.gov" target="_blank" class="resource-card">
+        <div class="resource-emoji">🆔</div>
+        <div class="resource-info">
+          <h3>IdentityTheft.gov</h3>
+          <p>Your personal information was stolen — this site walks you through every step to recover. Created by the FTC.</p>
+        </div>
+      </a>
+      <a href="https://ic3.gov" target="_blank" class="resource-card">
+        <div class="resource-emoji">🚔</div>
+        <div class="resource-info">
+          <h3>ic3.gov — FBI Internet Crime</h3>
+          <p>Report online scams, fraud, and cybercrime in the United States. Your report helps protect others.</p>
+        </div>
+      </a>
+      <a href="https://haveibeenpwned.com" target="_blank" class="resource-card">
+        <div class="resource-emoji">🔍</div>
+        <div class="resource-info">
+          <h3>HaveIBeenPwned.com</h3>
+          <p>Type your email address — instantly see if your password was exposed in a data breach. Free.</p>
+        </div>
+      </a>
+      <a href="https://annualcreditreport.com" target="_blank" class="resource-card">
+        <div class="resource-emoji">💳</div>
+        <div class="resource-info">
+          <h3>AnnualCreditReport.com</h3>
+          <p>Check your credit report for free. Look for accounts you did not open — a sign of identity theft.</p>
+        </div>
+      </a>
+      <a href="https://consumer.ftc.gov/articles/what-do-if-you-were-scammed" target="_blank" class="resource-card">
+        <div class="resource-emoji">📋</div>
+        <div class="resource-info">
+          <h3>FTC — What To Do If You Were Scammed</h3>
+          <p>Step-by-step guide from the Federal Trade Commission. Covers phone scams, email scams, fake websites, and more.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ── FAQ ── -->
+  <div class="section" id="section-faq">
+
+    <div class="section-header">
+      <h2>Frequently Asked Questions</h2>
+      <p>Tap any question to see the answer.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is a free antivirus actually good enough?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <strong>Yes, for most people.</strong> Windows Defender (built into Windows) scores consistently well in independent tests and protects against the vast majority of everyday threats. The main advantage of paid tools like Norton is the bundled VPN, customer support, and extras like a password manager. For basic home use, free is absolutely fine.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Can I trust a password manager with all my passwords?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <strong>Yes — it is far safer than reusing passwords.</strong> Tools like Bitwarden encrypt your vault locally before it ever reaches their servers, so even they cannot see your passwords. The risk of one weak reused password being stolen and used across all your accounts is far greater than using a reputable password manager.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What if I clicked a suspicious link — what do I do right now?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <strong>Act immediately:</strong><br><br>
+            1. Turn off your WiFi on that device right now.<br>
+            2. From a <em>different</em> device, change the password for any account you were using.<br>
+            3. Call your bank if you entered any financial information.<br>
+            4. Run a Windows Defender scan: Start → Windows Security → Quick scan.<br><br>
+            Do not panic — catching it fast significantly limits the damage.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What does the number 1 in "paypa1.com" mean?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Scammers buy domain names that look nearly identical to real ones by swapping letters for numbers or adding extra characters. "paypa<strong>1</strong>.com" uses the number 1 instead of a lowercase letter L. At a glance it looks identical. Always look at the sender's full email address and the URL in your browser bar — not just the display name.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is it safe to use VirusTotal for any file?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            <strong>Safe for most files — with one important exception.</strong> Do not upload documents containing personal information like tax returns, bank statements, medical records, or anything with your Social Security Number. Files uploaded to VirusTotal are shared with security researchers. For those sensitive files, run a local scan with Windows Defender instead.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Do I really need 2FA on every account?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            You do not need it on every account — focus on the ones that matter most: <strong>email</strong> (if someone gets into your email they can reset every other account), <strong>banking</strong>, and <strong>social media</strong>. Those three cover the accounts that cause the most damage if compromised. Everything else is a bonus.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">My child says everyone shares their location online — is that normal?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            It is common, but it is not safe. Children often share location in gaming apps, social media, and messaging without thinking of it as a risk. The conversation to have is simple: <em>"Your location tells strangers where you are right now, where you live, and when you are home alone."</em> Use Apple Screen Time or Google Family Link to restrict location sharing in apps.
+          </div>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How do I know if my computer already has a virus?</span>
+          <span class="faq-chevron">▼</span>
+        </button>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">
+            Common signs: your computer is suddenly much slower, you see pop-up ads you never saw before, programs open on their own, or your browser redirects to unexpected websites. The best way to check: run a full scan with Windows Defender (Start → Windows Security → Virus &amp; threat protection → Scan options → Full scan). If you find something, do not pay anyone who calls you offering to fix it — that is usually a scam.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</main>
+
+<div class="footer-accent"></div>
+<footer>
+  Smart Online Safety for Everyday Life &nbsp;·&nbsp; All tools listed are free or have free tiers unless noted &nbsp;·&nbsp; No affiliation with any listed product
+</footer>
+
+<script>
+  // ── TAB SWITCHING ──
+  function showSection(id, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // ── CHECKLIST ──
+  const STORAGE_KEY = 'sol_checklist_v1';
+  const messages = [
+    "Start with anything — every step counts.",
+    "Great start — keep going!",
+    "You are making real progress.",
+    "Halfway there — you are doing great!",
+    "More than halfway — impressive!",
+    "Almost there — nearly fully protected.",
+    "Just a few more steps!",
+    "Nearly done — you are so close!",
+    "One more to go!",
+    "Almost complete — one last step!",
+    "🎉 Fully protected — well done!"
+  ];
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {}; } catch(e) { return {}; }
+  }
+  function saveState(state) {
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {}
+  }
+
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const state = loadState();
+    const idx = Array.from(document.querySelectorAll('.check-item')).indexOf(el);
+    state[idx] = el.classList.contains('done');
+    saveState(state);
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const items = document.querySelectorAll('.check-item');
+    const done = document.querySelectorAll('.check-item.done').length;
+    const pct = Math.round((done / items.length) * 100);
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-count').textContent = done + ' of ' + items.length + ' completed';
+    document.getElementById('progress-message').textContent = messages[done] || messages[messages.length-1];
+    const banner = document.getElementById('completion-banner');
+    if (done === items.length) { banner.classList.add('show'); }
+    else { banner.classList.remove('show'); }
+  }
+
+  function restoreState() {
+    const state = loadState();
+    const items = document.querySelectorAll('.check-item');
+    items.forEach((item, idx) => {
+      if (state[idx]) item.classList.add('done');
+    });
+    updateProgress();
+  }
+
+  // ── FAQ ──
+  function toggleFaq(btn) {
+    const item = btn.closest('.faq-item');
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item').forEach(f => {
+      f.classList.remove('open');
+      f.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  }
+
+  // ── INIT ──
+  restoreState();
+</script>
+
+</body>
+</html>
